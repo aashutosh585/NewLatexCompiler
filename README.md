@@ -2,6 +2,10 @@
 
 Standalone LaTeX → PDF compiler microservice. FastAPI + TeX Live slim, Dockerized, sync-only.
 
+**Live Deployment:** [https://newlatexcompiler.onrender.com/](https://newlatexcompiler.onrender.com/)
+
+> **⚠️ Important note for Render Free-Tier users:** Free-tier instances spin down after inactivity. Always ping the `/health` endpoint first to wake up the server before sending a large compilation payload, otherwise your request might time out while waiting for the container to boot!
+
 ## Quick Start
 
 ### With Docker (recommended)
@@ -28,6 +32,8 @@ python main.py
 ### `GET /health`
 
 Returns engine versions and service status.
+
+> **Best Practice:** Call this endpoint first to wake up sleeping free-tier servers before requesting a compilation!
 
 ```bash
 curl http://localhost:3002/health
