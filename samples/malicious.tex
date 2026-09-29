@@ -1,0 +1,18 @@
+\documentclass{article}
+\begin{document}
+
+% Attempt 1: Shell escape — should be blocked by -no-shell-escape
+\immediate\write18{echo PWNED > /tmp/pwned.txt}
+
+% Attempt 2: Read sensitive file via \input with absolute path
+\input{/etc/passwd}
+
+% Attempt 3: Path traversal
+\input{../../etc/shadow}
+
+% Attempt 4: directlua escape
+\directlua{os.execute("whoami")}
+
+If you see this compiled, the security checks failed.
+
+\end{document}

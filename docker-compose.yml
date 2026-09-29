@@ -1,0 +1,38 @@
+# ============================================================
+# NewLatexCompiler — docker-compose.yml
+# ============================================================
+
+services:
+  latex-compiler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: new-latex-compiler
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - HOST=0.0.0.0
+      - COMPILER_SECRET=${COMPILER_SECRET:-}
+      - COMPILE_TIMEOUT_SECS=20
+      - DEFAULT_ENGINE=pdflatex
+      - CACHE_DIR=/tmp/latex-cache
+      - MAX_INPUT_BYTES=204800
+    volumes:
+      - latex-cache:/tmp/latex-cache
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 1G
+        reservations:
+          cpus: "0.5"
+          memory: 256M
+    # Security: no network access inside container (compile isolation)
+    # Uncomment the next line to fully block outbound network:
+    # network_mode: "none"
+    restart: unless-stopped
+
+volumes:
+  latex-cache:
+    driver: local

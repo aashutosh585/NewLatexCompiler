@@ -1,0 +1,36 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+
+\title{Sample Document}
+\author{DinoMate Compiler Test}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+This is a minimal valid \LaTeX\ document used to verify that the
+\texttt{NewLatexCompiler} microservice compiles successfully.
+
+\subsection{Features Tested}
+\begin{itemize}
+    \item Basic document structure
+    \item Package loading (\texttt{geometry}, \texttt{hyperref})
+    \item Math mode: $E = mc^2$
+    \item Cross-reference: see Section~\ref{sec:conclusion}
+\end{itemize}
+
+\section{Math Example}
+The quadratic formula:
+\[
+    x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\]
+
+\section{Conclusion}
+\label{sec:conclusion}
+If you can read this PDF, the compiler is working correctly.
+
+\end{document}
